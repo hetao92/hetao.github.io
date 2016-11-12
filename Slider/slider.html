@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src='http://cdn.bootcss.com/jquery/3.1.1/jquery.js'></script>
+        <style media="screen">
+            body{background-image: url(../img/wall.jpg)}
+            .slideContainer{
+                position:relative;
+                width:80%;
+                height:100%;
+                left:50%;
+                transform: translateX(-50%);
+            }
+
+            .imgContainer{
+                position:relative;
+                width:100%;
+                height:100%;
+            }
+            .img-slide{
+                width:100%;
+                height:100%;
+                overflow: hidden;
+                display: none;
+            }
+            .img-slide-active{
+                display: block;
+            }
+            .img-button{
+                position:absolute;
+                opacity:0;
+            }
+            /*.img-button:hover{
+                opacity:0.7;
+            }*/
+            .img-button-left{
+                left:0;
+                top:50%;
+                height:60px;
+                transform: translateY(-50%);
+            }
+            .img-button-right{
+                right:0;
+                top:50%;
+                height:60px;
+                transform: translateY(-50%);
+            }
+            .indicator-slide-container{
+                position:relative;
+                text-align: center;
+                bottom:20px;
+            }
+            .indicator-slide{
+                display: inline-block;
+                background: gray;
+                color:white;
+                border-radius: 50%;
+                padding: 0 5px;
+                opacity:0.5;
+            }
+            .indicator-slide-active{
+                background: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slideContainer">
+            <div class="imgContainer" data-active="0" data-imgs="4">
+                <img class="img-slide img-slide-active" src="../img/slide1.jpg" alt="" />
+                <img class="img-slide" src="../img/slide2.jpg" alt="" />
+                <img class="img-slide" src="../img/slide3.jpg" alt="" />
+                <img class="img-slide" src="../img/slide4.jpg" alt="" />
+                <button type="button" class="img-button img-button-left"><</button>
+                <button type="button" class="img-button img-button-right">></button>
+            </div>
+            <div class="indicator-slide-container">
+                <div class="indicator-slide indicator-slide-active" data-index="0">1</div>
+                <div class="indicator-slide" data-index="1">2</div>
+                <div class="indicator-slide" data-index="2">3</div>
+                <div class="indicator-slide" data-index="3">4</div>
+            </div>
+        </div>
+    <script>
+        //绑定按钮
+        var play = function(num) {
+            var activeIndex = $('.imgContainer').data('active')
+            var numberOfImgs = $('.imgContainer').data('imgs')
+            var i = (activeIndex + numberOfImgs + num) % numberOfImgs
+            $('.imgContainer').data('active',i)
+            $('.img-slide-active').fadeOut()
+            $('.img-slide-active').removeClass('img-slide-active')
+            var active = $($('.img-slide')[i])
+            active.addClass('img-slide-active')
+            active.fadeIn()
+        //指示器
+            $('.indicator-slide-active').removeClass('indicator-slide-active')
+            var activeIndicator = $($('.indicator-slide')[i])
+            activeIndicator.addClass('indicator-slide-active')
+        }
+
+        $('.img-button').on('click', function(event) {
+            var button = $(event.target)
+            if (button.hasClass('img-button-left')) {
+                play(-1)
+            } else {
+                play(1)
+            }
+        })
+        //鼠标点击播放图片
+        $('.indicator-slide').on('click', function(event) {
+            console.log('1')
+            var button = $(event.target)
+            var i = $(event.target).data('index')
+
+            $('.imgContainer').data('active',i)
+            $('.img-slide-active').fadeOut()
+            $('.img-slide-active').removeClass('img-slide-active')
+
+            var active = $($('.img-slide')[i])
+            active.addClass('img-slide-active')
+            active.fadeIn()
+
+            $('.indicator-slide-active').removeClass('indicator-slide-active')
+            button.addClass('indicator-slide-active')
+        })
+
+        //鼠标滑过播放
+        // $('.indicator-slide').on('mouseover', function(event) {
+        //     var button = $(event.target)
+        //     var i = $(event.target).data('index')
+        //
+        //     $('.imgContainer').data('active',i)
+        //     $('.img-slide-active').fadeOut()
+        //     $('.img-slide-active').removeClass('img-slide-active')
+        //
+        //     var active = $($('.img-slide')[i])
+        //     active.addClass('img-slide-active')
+        //     active.fadeIn()
+        //
+        //     $('.indicator-slide-active').removeClass('indicator-slide-active')
+        //     button.addClass('indicator-slide-active')
+        // })
+
+
+        //设置按钮显现
+        var s = `
+        <style class='button-hover'>
+        .img-button{
+            opacity:0.7;
+        }
+        `
+        $('.slideContainer').on('mouseover', function() {
+            $('style').append(s)
+        })
+        $('.slideContainer').on('mouseout', function() {
+            $('.button-hover').fadeOut()
+            $('.button-hover').remove()
+        })
+    </script>
+    </body>
+</html>
