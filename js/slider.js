@@ -41,23 +41,6 @@ $('.indicator-slide').on('click', function(event) {
     button.addClass('indicator-slide-active')
 })
 
-//鼠标滑过播放
-// $('.indicator-slide').on('mouseover', function(event) {
-//     var button = $(event.target)
-//     var i = $(event.target).data('index')
-//
-//     $('.imgContainer').data('active',i)
-//     $('.img-slide-active').fadeOut()
-//     $('.img-slide-active').removeClass('img-slide-active')
-//
-//     var active = $($('.img-slide')[i])
-//     active.addClass('img-slide-active')
-//     active.fadeIn()
-//
-//     $('.indicator-slide-active').removeClass('indicator-slide-active')
-//     button.addClass('indicator-slide-active')
-// })
-
 
 //设置按钮显现
 var s = `

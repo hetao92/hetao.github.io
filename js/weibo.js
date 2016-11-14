@@ -14,7 +14,7 @@ $('.submitButton').on('click', function() {
     var month = new Date().getMonth() + 1
     var day = new Date().getDate()
     var hour = new Date().getHours()
-    var seconds = new Date().getSeconds()
+    var seconds = new Date().getMinutes()
     var s = `
         <div class="content">
             <div class='reply'>

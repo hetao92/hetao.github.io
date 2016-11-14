@@ -51,10 +51,6 @@ var sliderEvents = function() {
 var bindEvents = function() {
     $('.music-button').on('click','span',function(e){
         var button = e.target
-        // if (button == $('span')) {
-        //     button = button.parentElement
-        // }
-        //
         var type = button.dataset.action
         var actions = {
             list:allSong,
@@ -89,7 +85,6 @@ var playMode = function(mode) {
 }
 //打开曲单按钮
 var allSong = function(button) {
-    // $('.music-list-container').css('display','block')
     $('.music-list-container').fadeToggle(1500)
     setTimeout(function(){
         $('.music-list-container').fadeOut(1500)
@@ -137,7 +132,6 @@ var nextSong = function(button) {
 }
 //音量按钮
 var volumeAdjust = function(button) {
-
     $('#volume-slider').fadeTo(2000,1)
     setTimeout(function(){
         $('#volume-slider').fadeTo(2000,0)
