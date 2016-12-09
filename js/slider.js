@@ -23,6 +23,11 @@ $('.img-button').on('click', function(event) {
         play(1)
     }
 })
+//自动播放
+var autoplay = setInterval(function(){
+    play(1)
+},4000)
+
 //鼠标点击播放图片
 $('.indicator-slide').on('click', function(event) {
     console.log('1')
@@ -43,16 +48,9 @@ $('.indicator-slide').on('click', function(event) {
 
 
 //设置按钮显现
-var s = `
-<style class='button-hover'>
-.img-button{
-    opacity:0.7;
-}
-`
 $('.slideContainer').on('mouseover', function() {
-    $('style').append(s)
+    $('.img-button').css('opacity',0.7)
 })
 $('.slideContainer').on('mouseout', function() {
-    $('.button-hover').fadeOut()
-    $('.button-hover').remove()
+    $('.img-button').css('opacity',0)
 })
